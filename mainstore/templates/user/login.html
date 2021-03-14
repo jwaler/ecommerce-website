@@ -1,0 +1,29 @@
+
+{% extends '../main.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+<div class="container is-max-widescreen py-6">
+    <div class="login-page">
+        <div class="form">
+            <form class="login-form"></form>
+                <div class="field">
+                    <label class="label">Username / Email</label>
+                    <div class="control">
+                        <input class="input" type="email" placeholder="e.g. alex@example.com or alex">
+                    </div>
+                </div>
+                
+                <div class="field">
+                    <label class="label">Password</label>
+                    <div class="control">
+                        <input class="input" type="password" placeholder="********">
+                    </div>
+                </div>    
+                <button class="button">Sign in</button>
+                <p class="message">Not registered? <a href="/register">Create an account</a></p>
+            </form>
+        </div>
+    </div>
+</div>
+    {% endblock content %}

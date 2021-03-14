@@ -1,0 +1,52 @@
+{% extends '../main.html' %}
+{% load static %}
+{% load mathfilters %}
+
+{% block content %}
+<div class="container is-max-widescreen py-6 px-6">
+    <div class="columns">
+        <div class='container py-3 column auto'>
+            <div class="card ctn">
+                <div class="card-content">
+                    <progress class="progress is-medium is-info" value="50" max="100">50%</progress>
+                    <div class="table-item-list">
+                            <div class="pb-3">
+                                <a class="button is-rounded button-background" href="{% url 'cart' %}"><i class="fas fa-arrow-left mr-3"></i> Return</a>
+                                <a class="button is-rounded button-background" href="{% url 'store' %}"><i class="fas fa-shopping-bag mr-3"></i> Store</a>
+                                <a class="button is-rounded is-success checkoutdiv" href="{% url 'payment' %}"><i class="fa fa-credit-card mr-3"
+                                        aria-hidden="true"></i> Payment</a>
+                            </div>
+                            
+                            <div>
+                                <span class="tag is-link is-medium mb-2">Summary of your order</span>
+                                <span class="totaltitle">Total Items : </span><span class="totaldisplay">{{ order.get_cart_items }} </span>
+                                <span class="totaltitle">Total Amount : </span><span class="totaldisplay">${{ order.get_total_cart|floatformat:2 }} </span>
+                            </div>
+                        <table class="table is-fullwidth table-background">
+                            <thead>
+                                <th></th>
+                                <th>Product</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                            </thead>
+                            <tbody>
+                                {% for p in items %}
+                                <tr>
+                                    <td><img class="cartimg" src="{{p.product.imageURL}}" alt=""></td>
+                                    <td>{{ p.product.iname }}</td>
+                                    <td>{{ p.product.iprice|floatformat:2 }}</td>
+                                    <td>x {{ p.quantity }}</td>
+                                    <td>${{ p.get_total }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

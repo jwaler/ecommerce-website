@@ -1,0 +1,40 @@
+{% extends '../main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container is-max-widescreen py-6 px-6">
+        <div class="columns is-centered is-multiline">
+            {% for item in allproduct %} <!-- "reversed" if order id > -->
+            <div class="column is-one-third">
+                <div class="card">
+                    <div class="card-image">
+                        <figure class="image is-4by3">
+                            <img class="imgitem" src="{{ item.imageURL }}" alt="">
+                        </figure>
+                    </div>
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="media-content">
+                                <p class="title is-4">{{ item.iname }}</p>
+                                <span style="align-content:right;" class="tag is-success">{{ item.iprice|floatformat:2 }}</span> HKD
+                                
+                            </div>
+                        </div>
+                        <div class="content">
+                            <p>{{ item.idesc }}</p>
+                            <a href="#">#css</a> <a href="#">#responsive</a>
+                            <br>
+                        </div>
+                    </div>
+                    <div class="card box-element item">
+                        <footer class="card-footer">
+                            <button data-item={{item.id}} data-action="add" class="update-cart"><i class="fa fa-plus mr-3" aria-hidden="true"></i>Add</button>
+                            <button class="view-card"><i class="fa fa-search mr-3" aria-hidden="true"></i>View</button>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+</div>
+    {% endblock content %}

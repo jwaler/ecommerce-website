@@ -1,0 +1,66 @@
+{% extends '../main.html' %}
+{% load static %}
+{% load mathfilters %}
+
+    {% block content %}
+    <div class="container is-max-widescreen py-6 px-6">
+
+        <div class='container py-3 is-fullwidth'>
+            <div class="card ctn">
+                <div class="card-content">
+                    <div class="table-main-info">
+                        <progress class="progress is-medium is-info" value="25" max="100">50%</progress>
+                        <div class="pb-3">
+                            <a class="button is-rounded button-background" href="{% url 'store' %}"><i class="fa fa-arrow-left mr-3"
+                                    aria-hidden="true"></i> Store</a>
+                            <a class="button is-rounded is-success checkoutdiv" href="{% url 'checkout' %}"><i class="fa fa-credit-card mr-3"
+                                    aria-hidden="true"></i> Check out</a>
+                        </div>
+                        <span class="tag is-link is-medium mb-2">Your cart</span>
+                        <p>Total items : {{order.get_cart_items}}</p>
+                        <p>Total amount : ${{order.get_total_cart}}</p>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class='container py-3 auto'>
+            <div class="card ctn">
+                <div class="card-content">
+                    <div class="table-item-list">
+                        <p><span class="tag is-link is-medium mb-2">Your items</span></p>
+                            <table class="table is-hoverable is-fullwidth table-background">
+                                <thead>
+                                    <th></th>
+                                    <th>Product</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                </thead>
+                                <tbody>
+                                    {% for p in items %}
+                                    <tr>
+                                        <td><img class="cartimg" src="{{p.product.imageURL}}" alt=""></td>
+                                        <td>{{ p.product.iname }}</td>
+                                        <td>{{ p.product.iprice|floatformat:2 }}</td>
+                                        <td>
+                                            <div>
+                                                {{ p.quantity }}
+                                                <img data-item="{{ p.product.id }}" data-action="remove" class="mini-icon update-cart"
+                                                    src="{% static 'images/minus.png' %}" alt="">
+                                                <img data-item="{{ p.product.id }}" data-action="add" class="mini-icon update-cart" src="{% static 'images/plus.png' %}"
+                                                    alt="">
+                                            </div>  
+                                        </td>
+                                        <td>${{ p.get_total }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                    </div>
+            
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock content %}

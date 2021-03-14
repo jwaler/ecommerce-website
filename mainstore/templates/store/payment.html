@@ -1,0 +1,184 @@
+{% extends '../main.html' %}
+{% load static %}
+{% load mathfilters %}
+
+{% block content %}
+<div class="container is-max-widescreen py-6 px-6">
+        <div class='container py-3'>
+            <div class="card ctn">
+                <div class="card-content">
+                    <progress class="progress is-medium is-info" value="75" max="100">50%</progress>
+                    <div class="table-item-list">
+                        <div class="pb-3">
+                            <a class="button is-rounded button-background" href="{% url 'checkout' %}"><i
+                                    class="fas fa-arrow-left"></i></a>
+                            <a class="button is-rounded button-background" href="{% url 'store' %}"><i
+                                    class="fas fa-shopping-bag"></i></a>
+                        </div>
+                    </div>
+                    <div class="box-element" id="shipping-info-main">
+                        <div class="header mb-2">
+                            <span class="tag is-link is-medium">Shipping Info</span>
+                            <span id="ok-tag" class="tag is-success is-medium is-hidden"><i class="fas fa-check mr-2"></i>OK</span>
+                        </div>
+                        <div class="form">
+                            {% csrf_token %}
+                            <form id="shipping-form">
+                                <div class="div-input-size" id="user-info">
+                                    <div class="form-field">
+                                        <input required class="form-control input is-small" type="text" name="name" placeholder="Name..">
+                                    </div>
+                                    <div class="form-field">
+                                        <input required class="form-control input is-small" type="email" name="email" placeholder="Email..">
+                                    </div>
+                                </div>
+                        
+                                <div class="div-input-size" id="shipping-info">
+                                    <hr>
+                                    <p>Shipping Information:</p>
+                                    <hr>
+                                    <div class="form-field">
+                                        <input class="form-control input is-small" type="text" name="address" placeholder="Address..">
+                                    </div>
+                                    <div class="form-field">
+                                        <input class="form-control input is-small" type="text" name="city" placeholder="City..">
+                                    </div>
+                                    <div class="form-field">
+                                        <input class="form-control input is-small" type="text" name="state" placeholder="State..">
+                                    </div>
+                                    <div class="form-field">
+                                        <input class="form-control input is-small" type="text" name="zipcode" placeholder="Zip code..">
+                                    </div>
+                                </div>
+                                <hr>
+                                <input id="form-button" class="button" style="max-width: 30%;" type="submit" value="Continue">
+                            </form>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="tag is-link is-medium mb-2">Payment method</span>
+                    </div>
+                    <div class="box-element is-hidden" id="payment-info">
+                        <small>Paypal Options</small>
+                        <h1>Please proceed to pay : <b>${{order.get_total_cart|floatformat:2 }}</b></h1>
+                        <p>Choose mean of payment :</p>
+                        <div id="paypal-button-container"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class='container py-3'>
+            <div class="card ctn">
+                <div class="card-content">
+                        <div>
+                            <span class="tag is-link is-medium mb-2">Summary of your order</span>
+                            <span class="totaltitle">Total Items : </span><span class="totaldisplay">{{order.get_cart_items }} </span>
+                            <span class="totaltitle">Total Amount : </span><span class="totaldisplay">${{order.get_total_cart|floatformat:2 }} </span>
+                        </div>
+                        <table class="table is-fullwidth table-background">
+                            <thead>
+                                <th></th>
+                                <th>Product</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                            </thead>
+                            <tbody>
+                                {% for p in items %}
+                                <tr>
+                                    <td><img class="cartimg" src="{{p.product.imageURL}}" alt=""></td>
+                                    <td>{{ p.product.iname }}</td>
+                                    <td>{{ p.product.iprice|floatformat:2 }}</td>
+                                    <td>x {{ p.quantity }}</td>
+                                    <td>${{ p.get_total }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+</div>
+<script>
+    var shipping = '{{ order.shipping }}'
+    var total= '{{order.get_total_cart}}'
+
+    var user = '{{request.user}}'
+    if (shipping == 'False') {
+        document.getElementById('shipping-info').innerHTML = ''
+    }
+
+    if (user != 'AnonymousUser'){
+        document.getElementById('user-info').innerHTML= ''
+    }
+
+    if (shipping == 'False' && user != 'AnonymousUser'){
+        //hide entire form if user is logged in and shipping is false
+        document.getElementById('shipping-info-main').classList.add('is-hidden')
+        //show payment if logged in user wantrs to buy item no need shipping
+        document.getElementById('payment-info').classList.remove('is-hidden')
+    }
+
+    var form = document.getElementById('shipping-form')
+
+    csrftoken = form.getElementsByTagName('input')[0].value
+    form.addEventListener('submit', function(e){
+        e.preventDefault()
+        console.log('Form submitted')
+        document.getElementById('form-button').classList.add('is-hidden')
+        document.getElementById('payment-info').classList.remove('is-hidden')
+        document.getElementById('ok-tag').classList.remove('is-hidden')
+    })
+    // document.getElementById('make-payment').addEventListener('click', function(e){
+    //     submitFormData()
+    // })
+    function submitFormData(){
+        console.log('Payment successful')
+        var userFormData = {
+            'name':null,
+            'email': null,
+            'total': total
+        }
+        var shippingInfo = {
+            'address': null,
+            'city': null,
+            'state': null,
+            'zipcode': null
+        }
+        if(shipping != 'False'){
+            shippingInfo.address = form.address.value
+            shippingInfo.city = form.city.value
+            shippingInfo.state = form.state.value
+            shippingInfo.zipcode = form.zipcode.value
+        }
+        if (user == 'AnonymousUser') {
+            userFormData.name = form.name.value
+            userFormData.email = form.email.value
+        }
+
+        var url ='/process_order/'
+        fetch(url, {
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json',
+                'X-CSRFToken':csrftoken,
+            },
+            body:JSON.stringify({'form':userFormData, 'shipping':shippingInfo})
+        })
+        .then((response) => {
+                return response.json();
+            })
+        .then((data) => {
+            console.log("success", data);
+            // alert('Transaction completed')
+            cart = {}
+        document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/";
+        window.location.href = "{% url 'store' %}";
+        });
+    }
+</script>
+{% endblock content %}
