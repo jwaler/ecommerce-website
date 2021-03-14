@@ -1,0 +1,270 @@
+@viewport {
+  width: device-width;
+  zoom: 1;
+}
+@media (min-width: 482px) {
+  html,
+  body {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+      url(../images/background.jpg) !important;
+    background-position: center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 100% !important;
+  }
+
+  ::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: rgb(46, 46, 46) !important;
+    opacity: 0.5; /* Firefox */
+  }
+
+  :-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: rgb(46, 46, 46) !important;
+  }
+
+  ::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: rgb(46, 46, 46) !important;
+  }
+  .imgitem {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+  }
+  .mainlogo {
+    max-height: 3em;
+  }
+  .mini-icon {
+    height: 20px;
+    width: 20px;
+  }
+  .cartimg {
+    max-height: 2em;
+  }
+  .totaltitle {
+    padding-left: 3em;
+    font-weight: bolder;
+  }
+  .totaldisplay {
+    font-weight: bolder;
+    color: rgb(0, 45, 75);
+  }
+  .div-input-size {
+    max-width: 50%;
+  }
+  button {
+    width: 100%;
+    background: transparent;
+    border: none;
+    background: #5e9621;
+    color: #fff;
+    padding: 15px;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: all 0.35s ease;
+  }
+  button:hover {
+    cursor: pointer;
+    background: #4b974b;
+    color: #fff !important;
+  }
+  .form input {
+    outline: 0;
+    color: rgba(0, 0, 0) !important;
+    width: 100%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 10px;
+    box-sizing: border-box;
+    font-size: 14px;
+    border-bottom: 1px solid #ccc;
+  }
+  .checkoutdiv {
+    float: right;
+  }
+  .button-background {
+    background: rgba(255, 255, 255, 0.5) !important;
+  }
+  .ctn {
+    background: rgba(255, 255, 255, 0.7) !important;
+  }
+  .ctnmenu {
+    background: rgba(255, 255, 255, 0.9) !important;
+  }
+  .table-background {
+    background: rgba(255, 255, 255, 0.5) !important;
+  }
+  section {
+    width: 100%;
+    display: inline-block;
+    background: #333;
+    height: 50vh;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 700;
+    text-decoration: underline;
+  }
+  .foot-menu-div-block {
+    visibility: hidden;
+  }
+}
+@media (max-width: 481px) {
+  .topmenu-div-block nav {
+    visibility: hidden;
+  }
+  html,
+  body {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+      url(../images/background.jpg) !important;
+    background-position: center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 100% !important;
+  }
+
+  ::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: rgb(46, 46, 46) !important;
+    opacity: 0.5; /* Firefox */
+  }
+
+  :-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: rgb(46, 46, 46) !important;
+  }
+
+  ::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: rgb(46, 46, 46) !important;
+  }
+  .imgitem {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+  }
+  .mainlogo {
+    max-height: 3em;
+  }
+  .mini-icon {
+    height: 20px;
+    width: 20px;
+  }
+  .cartimg {
+    max-height: 2em;
+  }
+  .totaltitle {
+    padding-left: 3em;
+    font-weight: bolder;
+  }
+  .totaldisplay {
+    font-weight: bolder;
+    color: rgb(0, 45, 75);
+  }
+  .div-input-size {
+    max-width: 50%;
+  }
+  button {
+    width: 100%;
+    background: transparent;
+    border: none;
+    background: #5e9621;
+    color: #fff;
+    padding: 15px;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: all 0.35s ease;
+  }
+  button:hover {
+    cursor: pointer;
+    background: #4b974b;
+    color: #fff !important;
+  }
+  .form input {
+    outline: 0;
+    color: rgba(0, 0, 0) !important;
+    width: 100%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 10px;
+    box-sizing: border-box;
+    font-size: 14px;
+    border-bottom: 1px solid #ccc;
+  }
+  .checkoutdiv {
+    float: right;
+  }
+  .button-background {
+    background: rgba(255, 255, 255, 0.5) !important;
+  }
+  .ctn {
+    background: rgba(255, 255, 255, 0.7) !important;
+  }
+  .ctnmenu {
+    background: rgba(255, 255, 255, 0.9) !important;
+  }
+  .table-background {
+    background: rgba(255, 255, 255, 0.5) !important;
+  }
+  section {
+    width: 100%;
+    display: inline-block;
+    background: #333;
+    height: 50vh;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 700;
+    text-decoration: underline;
+  }
+  .foot-menu-div-block {
+    border-top-style: solid !important;
+    border-top: rgb(114, 114, 114);
+    border-top-width: thin;
+    font-size: 12px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+  .cat-menu-div {
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  a:link {
+    color: darkslategrey;
+  }
+  .cat-menu-div:hover {
+    background-color: seagreen;
+    color: snow !important;
+  }
+  .cat-menu-div a:hover {
+    color: snow;
+  }
+  .footer-distributed {
+    font: bold 10px sans-serif;
+  }
+
+  .footer-distributed .footer-left,
+  .footer-distributed .footer-center,
+  .footer-distributed .footer-right {
+    display: block;
+    width: 100%;
+    margin-bottom: 40px;
+    text-align: center;
+  }
+
+  .footer-distributed .footer-center i {
+    margin-left: 0;
+  }
+  .imgmenu {
+    -moz-box-align: center;
+    max-height: 25px;
+    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(100%);
+  }
+}
